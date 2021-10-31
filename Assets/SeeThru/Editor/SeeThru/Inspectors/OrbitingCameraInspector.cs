@@ -19,6 +19,7 @@ namespace SeeThru.Inspectors
         SerializedProperty m_VerticalAxis;
         SerializedProperty m_HorizontalSensitivity;
         SerializedProperty m_VerticalSensitivity;
+        SerializedProperty m_MouseButtonToOrbit;
         SerializedProperty m_TargetDistance;
         SerializedProperty m_MinTargetDistance;
         SerializedProperty m_MaxTargetDistance;
@@ -45,6 +46,7 @@ namespace SeeThru.Inspectors
             m_VerticalAxis = serializedObject.FindProperty("VerticalAxis");
             m_HorizontalSensitivity = serializedObject.FindProperty("HorizontalSensitivity");
             m_VerticalSensitivity = serializedObject.FindProperty("VerticalSensitivity");
+            m_MouseButtonToOrbit = serializedObject.FindProperty("MouseButtonToOrbit");
             m_TargetDistance = serializedObject.FindProperty("TargetDistance");
             m_MinTargetDistance = serializedObject.FindProperty("MinTargetDistance");
             m_MaxTargetDistance = serializedObject.FindProperty("MaxTargetDistance");
@@ -84,6 +86,7 @@ namespace SeeThru.Inspectors
             EditorGUILayout.PropertyField(m_VerticalAxis);
             EditorGUILayout.PropertyField(m_HorizontalSensitivity);
             EditorGUILayout.PropertyField(m_VerticalSensitivity);
+            EditorGUILayout.PropertyField(m_MouseButtonToOrbit);
             EditorGUILayout.PropertyField(m_TargetDistance);
             EditorGUILayout.PropertyField(m_MinTargetDistance);
             EditorGUILayout.PropertyField(m_MaxTargetDistance);
