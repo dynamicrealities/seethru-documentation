@@ -21,6 +21,8 @@ namespace SeeThru.Cameras
         public float HorizontalSensitivity = 1f;
         [Min(0f), Tooltip("The Vertical Axis Sensitivity")]
         public float VerticalSensitivity = 1f;
+        [Tooltip("Whether to require mouse button to be held to orbit")]
+        public bool MouseButtonToOrbit = false;
 
         [Header("OrbitingCamera - Distance")]
         [Min(0f), Tooltip("How far away from the target in focus is the camera.")]
@@ -116,23 +118,21 @@ namespace SeeThru.Cameras
                     }
                     TargetDistance = Mathf.Clamp(TargetDistance, MinTargetDistance, MaxTargetDistance);
                     SetCameraPosition();
-                    Quaternion lookRotation;
-                    if (StayBehindTarget == false ? SetRotation() : SetRotation() || OrbitBehind())
-                    {
-                        _orbitAngles.x = Mathf.Clamp(_orbitAngles.x, MinVerticalAngle, MaxVerticalAngle);
-                        if (_orbitAngles.y < 0f)
-                        {
-                            _orbitAngles.y += 360f;
-                        }
-                        else if (_orbitAngles.y >= 360f)
-                        {
-                            _orbitAngles.y -= 360f;
-                        }
-                        lookRotation = Quaternion.Euler(_orbitAngles);
-                    }
-                    else
-                    {
-                        lookRotation = transform.rotation;
+                    Quaternion lookRotation = lookRotation = transform.rotation;
+                    if(!MouseButtonToOrbit || Input.GetMouseButton(0)){
+                      if (StayBehindTarget == false ? SetRotation() : SetRotation() || OrbitBehind())
+                      {
+                          _orbitAngles.x = Mathf.Clamp(_orbitAngles.x, MinVerticalAngle, MaxVerticalAngle);
+                          if (_orbitAngles.y < 0f)
+                          {
+                              _orbitAngles.y += 360f;
+                          }
+                          else if (_orbitAngles.y >= 360f)
+                          {
+                              _orbitAngles.y -= 360f;
+                          }
+                          lookRotation = Quaternion.Euler(_orbitAngles);
+                      }
                     }
 
                     Vector3 lookDirection = lookRotation * Vector3.forward;
